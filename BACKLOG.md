@@ -14,7 +14,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 ### Kimlik Doğrulama ve Yetkilendirme
 - [x] Keycloak entegrasyonu ve kurulumu
 - [x] OAuth2 Authorization Server konfigürasyonu
-- [ ] JWT token üretimi ve doğrulama mekanizması
+- [x] JWT token üretimi ve doğrulama mekanizması
 - [ ] Refresh token mekanizması implementasyonu
 - [ ] Redis'te token saklama ve yönetimi
 
