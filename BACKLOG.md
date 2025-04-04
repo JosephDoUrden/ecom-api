@@ -12,8 +12,8 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] CI/CD pipeline kurulumu (GitHub Actions)
 
 ### Kimlik Doğrulama ve Yetkilendirme
-- [ ] Keycloak entegrasyonu ve kurulumu
-- [ ] OAuth2 Authorization Server konfigürasyonu
+- [x] Keycloak entegrasyonu ve kurulumu
+- [x] OAuth2 Authorization Server konfigürasyonu
 - [ ] JWT token üretimi ve doğrulama mekanizması
 - [ ] Refresh token mekanizması implementasyonu
 - [ ] Redis'te token saklama ve yönetimi

@@ -6,6 +6,10 @@ RED='\033[0;31m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
+# Change to project root directory since this script is in scripts/
+cd "$(dirname "$0")/.." || exit 1
+PROJECT_ROOT=$(pwd)
+
 # Function to check if directory exists and create it if not
 check_and_create_dir() {
   if [ ! -d "$1" ]; then
@@ -57,4 +61,4 @@ echo -e "  - Grafana: http://localhost:3000"
 echo -e "\n${YELLOW}Use the following commands:${NC}"
 echo -e "  - ${GREEN}docker-compose logs -f${NC} to view logs"
 echo -e "  - ${GREEN}docker-compose down${NC} to stop all services"
-echo -e "  - ${GREEN}./dev-rebuild.sh${NC} to rebuild and restart the API"
+echo -e "  - ${GREEN}./scripts/dev-rebuild.sh${NC} to rebuild and restart the API"
