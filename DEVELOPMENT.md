@@ -16,7 +16,7 @@ This document provides guidelines for developers working on the E-Commerce API p
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/ecom-api.git
+   git clone https://github.com/JosephDoUrden/ecom-api.git
    cd ecom-api
    ```
 
