@@ -117,9 +117,9 @@ jobs:
           #   docker-compose pull && \
           #   docker-compose up -d --force-recreate app && \
           #   docker system prune -f"
-          #           # 
-          # ssh -i ~/.ssh/dev_key ${{ secrets.DEV_SSH_USER }}@${{ secrets.DEV_SSH_HOST }} "${DEPLOY_SCRIPT}"          # ssh -i ~/.ssh/dev_key ${{ secrets.DEV_SSH_USER }}@${{ secrets.DEV_SSH_HOST }} "${DEPLOY_SCRIPT}"
-                    
-          echo "Development ortamı için build başarılı. Deployment adımı şu an atlanıyor."          echo "Development ortamı için build başarılı. Deployment adımı şu an atlanıyor."
-        env:        env:
-          DOCKER_IMAGE: josephdourden/ecom-api:develop          DOCKER_IMAGE: josephdourden/ecom-api:develop
+          # 
+          # ssh -i ~/.ssh/dev_key ${{ secrets.DEV_SSH_USER }}@${{ secrets.DEV_SSH_HOST }} "${DEPLOY_SCRIPT}"
+          
+          echo "Development ortamı için build başarılı. Deployment adımı şu an atlanıyor."
+        env:
+          DOCKER_IMAGE: josephdourden/ecom-api:develop
