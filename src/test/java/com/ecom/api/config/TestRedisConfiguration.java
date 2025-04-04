@@ -9,6 +9,8 @@ import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.mockito.Mockito;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.utility.DockerImageName;
 
@@ -53,6 +55,22 @@ public class TestRedisConfiguration {
     template.setValueSerializer(new JdkSerializationRedisSerializer());
     template.setHashValueSerializer(new JdkSerializationRedisSerializer());
     template.afterPropertiesSet();
+    return template;
+  }
+
+  @Bean
+  public RedisConnectionFactory redisConnectionFactory() {
+    return Mockito.mock(RedisConnectionFactory.class);
+  }
+
+  @Bean
+  public RedisTemplate<String, Object> redisTemplate() {
+    RedisTemplate<String, Object> template = new RedisTemplate<>();
+    template.setConnectionFactory(redisConnectionFactory());
+    template.setKeySerializer(new StringRedisSerializer());
+    template.setValueSerializer(new StringRedisSerializer());
+    template.setHashKeySerializer(new StringRedisSerializer());
+    template.setHashValueSerializer(new StringRedisSerializer());
     return template;
   }
 }
