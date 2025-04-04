@@ -1,0 +1,54 @@
+{
+  "id": "ecommerce",
+  "realm": "ecommerce",
+  "displayName": "E-Commerce Application",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "failureFactor": 3,
+  "roles": {
+    "realm": [
+      {
+        "name": "admin",
+        "description": "Administrator role"
+      },
+      {
+        "name": "customer",
+        "description": "Regular customer role"
+      },
+      {
+        "name": "vendor",
+        "description": "Vendor/seller role"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "ecommerce-api",
+      "name": "E-Commerce API",
+      "description": "E-Commerce API Client",
+      "enabled": true,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "ecommerce-api-secret",
+      "redirectUris": [
+        "http://localhost:8080/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "http://localhost:8080",
+        "http://localhost:3000"
+      ],
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "publicClient": false
+    }
+  ],
+  "defaultRoles": ["customer"]
+}
