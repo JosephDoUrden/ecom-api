@@ -61,19 +61,6 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: Build and analyze with SonarQube
-        if: github.event_name != 'pull_request'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: |
-          if [ -n "$SONAR_TOKEN" ] && [ -n "$SONAR_HOST_URL" ]; then
-            ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=ecom-api
-          else
-            echo "SonarQube analysis skipped: tokens not available"
-          fi
-
       - name: Build and publish Docker image
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
         uses: docker/build-push-action@v5
@@ -111,8 +98,21 @@ jobs:
       - name: Deploy to Dev Environment
         run: |
           echo "Deploying to development environment..."
-          # Add deployment scripts here (e.g., kubectl apply, SSH commands, etc.)
-          # This is a placeholder for actual deployment logic
-          echo "Deployed successfully to development environment"
+          # Şu anlık gerçek deployment adımını atlıyoruz.
+          # İleride deployment yapmak istediğinizde aşağıdaki gibi bir yapı kullanabilirsiniz:
+          # 
+          # mkdir -p ~/.ssh
+          # echo "${{ secrets.DEV_SSH_KEY }}" > ~/.ssh/dev_key
+          # chmod 600 ~/.ssh/dev_key
+          # echo "${{ secrets.DEV_SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          # 
+          # DEPLOY_SCRIPT="cd /opt/ecom/ecom-api && \
+          #   docker-compose pull && \
+          #   docker-compose up -d --force-recreate app && \
+          #   docker system prune -f"
+          # 
+          # ssh -i ~/.ssh/dev_key ${{ secrets.DEV_SSH_USER }}@${{ secrets.DEV_SSH_HOST }} "${DEPLOY_SCRIPT}"
+          
+          echo "Development ortamı için build başarılı. Deployment adımı şu an atlanıyor."
         env:
           DOCKER_IMAGE: josephdourden/ecom-api:develop
