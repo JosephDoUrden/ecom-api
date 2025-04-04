@@ -9,7 +9,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] Proje başlangıç yapısının oluşturulması (Spring Boot 3.x)
 - [x] PostgreSQL ve Redis veritabanı entegrasyonu
 - [x] Docker Compose ile geliştirme ortamı kurulumu
-- [ ] CI/CD pipeline kurulumu (GitHub Actions)
+- [x] CI/CD pipeline kurulumu (GitHub Actions)
 
 ### Kimlik Doğrulama ve Yetkilendirme
 - [ ] Keycloak entegrasyonu ve kurulumu
