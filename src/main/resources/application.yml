@@ -57,6 +57,11 @@ spring:
           issuer-uri: ${KEYCLOAK_URL:http://localhost:8081}/realms/ecommerce
           jwk-set-uri: ${KEYCLOAK_URL:http://localhost:8081}/realms/ecommerce/protocol/openid-connect/certs
 
+jwt:
+  secret: "TnPRxWYqF3h6JmVr2s5v8y/B?E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXn2r5u"
+  expiration: 86400000 # 24 hours in milliseconds
+  refresh-expiration: 604800000 # 7 days in milliseconds
+
 # Actuator Configuration
 management:
   endpoints:
