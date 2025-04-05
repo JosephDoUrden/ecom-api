@@ -37,6 +37,24 @@ public class User extends BaseEntity implements Serializable {
   @Column(name = "last_name")
   private String lastName;
 
+  @Column(name = "phone_number")
+  private String phoneNumber;
+
+  @Column(name = "address")
+  private String address;
+
+  @Column(name = "city")
+  private String city;
+
+  @Column(name = "state")
+  private String state;
+
+  @Column(name = "zip_code")
+  private String zipCode;
+
+  @Column(name = "country")
+  private String country;
+
   @Column(name = "active")
   private boolean active;
 }
