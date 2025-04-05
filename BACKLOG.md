@@ -23,7 +23,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] Kullanıcı giriş/çıkış API endpoint'leri
 - [x] Şifre sıfırlama ve değiştirme
 - [x] Kullanıcı profil yönetimi API endpoint'leri
-- [ ] Rol bazlı erişim kontrolü (RBAC) implementasyonu
+- [x] Rol bazlı erişim kontrolü (RBAC) implementasyonu
 
 ### İki Faktörlü Kimlik Doğrulama
 - [ ] 2FA için OTP üretimi ve doğrulama
