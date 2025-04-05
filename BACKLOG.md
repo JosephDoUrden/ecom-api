@@ -16,7 +16,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] OAuth2 Authorization Server konfigürasyonu
 - [x] JWT token üretimi ve doğrulama mekanizması
 - [x] Refresh token mekanizması implementasyonu
-- [ ] Redis'te token saklama ve yönetimi
+- [x] Redis'te token saklama ve yönetimi
 
 ### Kullanıcı Yönetimi
 - [ ] Kullanıcı kayıt API endpoint'i

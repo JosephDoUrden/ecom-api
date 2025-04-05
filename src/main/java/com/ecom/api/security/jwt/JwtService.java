@@ -1,6 +1,7 @@
 package com.ecom.api.security.jwt;
 
 import com.ecom.api.domain.model.TokenInfo;
+import com.ecom.api.security.token.TokenManagementService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -34,11 +35,11 @@ public class JwtService {
   @Value("${jwt.refresh-expiration}")
   private long refreshExpiration;
 
-  private final TokenRepository tokenRepository;
+  private final TokenManagementService tokenManagementService;
   private final UserDetailsService userDetailsService;
 
-  public JwtService(TokenRepository tokenRepository, UserDetailsService userDetailsService) {
-    this.tokenRepository = tokenRepository;
+  public JwtService(TokenManagementService tokenManagementService, UserDetailsService userDetailsService) {
+    this.tokenManagementService = tokenManagementService;
     this.userDetailsService = userDetailsService;
   }
 
@@ -81,7 +82,8 @@ public class JwtService {
         .revoked(false)
         .build();
 
-    tokenRepository.save(tokenInfo);
+    // Store the token with its expiration time
+    tokenManagementService.storeToken(tokenInfo, expiration / 1000);
 
     return tokenValue;
   }
@@ -104,8 +106,7 @@ public class JwtService {
   public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     // Check if token is valid in Redis
-    TokenInfo tokenInfo = tokenRepository.findByTokenValue(token);
-    boolean isValidInStorage = tokenInfo != null && !tokenInfo.isRevoked();
+    boolean isValidInStorage = tokenManagementService.validateToken(token);
 
     return (username.equals(userDetails.getUsername())) && !isTokenExpired(token) && isValidInStorage;
   }
@@ -133,19 +134,13 @@ public class JwtService {
   }
 
   public void revokeToken(String token) {
-    TokenInfo tokenInfo = tokenRepository.findByTokenValue(token);
-    if (tokenInfo != null) {
-      tokenInfo.setRevoked(true);
-      tokenRepository.save(tokenInfo);
-    }
+    tokenManagementService.revokeToken(token);
   }
 
   public void revokeAllUserTokens(String username) {
-    Set<TokenInfo> userTokens = tokenRepository.findByUsername(username);
-    if (userTokens != null && !userTokens.isEmpty()) {
-      userTokens.forEach(token -> token.setRevoked(true));
-      tokenRepository.saveAll(userTokens);
-    }
+    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+    String userId = extractUserId(userDetails);
+    tokenManagementService.revokeAllUserTokens(userId);
   }
 
   /**
@@ -164,10 +159,10 @@ public class JwtService {
         throw new IllegalArgumentException("Invalid refresh token");
       }
 
-      // Find token in repository
-      TokenInfo tokenInfo = tokenRepository.findByTokenValue(refreshToken);
+      // Check if token is valid in Redis
+      boolean isValidInStorage = tokenManagementService.validateToken(refreshToken);
 
-      if (tokenInfo == null || tokenInfo.isRevoked()) {
+      if (!isValidInStorage) {
         throw new IllegalArgumentException("Refresh token has been revoked");
       }
 
