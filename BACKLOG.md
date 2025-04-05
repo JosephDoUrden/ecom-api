@@ -20,7 +20,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 
 ### Kullanıcı Yönetimi
 - [x] Kullanıcı kayıt API endpoint'i
-- [ ] Kullanıcı giriş/çıkış API endpoint'leri
+- [x] Kullanıcı giriş/çıkış API endpoint'leri
 - [ ] Şifre sıfırlama ve değiştirme
 - [ ] Kullanıcı profil yönetimi API endpoint'leri
 - [ ] Rol bazlı erişim kontrolü (RBAC) implementasyonu
