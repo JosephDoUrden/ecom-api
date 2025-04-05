@@ -1,6 +1,10 @@
 package com.ecom.api.controller;
 
+import com.ecom.api.dto.request.RegisterRequest;
+import com.ecom.api.dto.response.RegisterResponse;
 import com.ecom.api.security.jwt.JwtService;
+import com.ecom.api.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,18 @@ import java.util.Map;
 public class AuthController {
 
   private final JwtService jwtService;
+  private final UserService userService;
+
+  @PostMapping("/register")
+  public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request) {
+    try {
+      RegisterResponse response = userService.registerUser(request);
+      return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    } catch (IllegalArgumentException e) {
+      // Return error response
+      return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+  }
 
   @PostMapping("/refresh")
   public ResponseEntity<Map<String, String>> refreshToken(@RequestBody Map<String, String> refreshRequest) {

@@ -19,7 +19,7 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] Redis'te token saklama ve yönetimi
 
 ### Kullanıcı Yönetimi
-- [ ] Kullanıcı kayıt API endpoint'i
+- [x] Kullanıcı kayıt API endpoint'i
 - [ ] Kullanıcı giriş/çıkış API endpoint'leri
 - [ ] Şifre sıfırlama ve değiştirme
 - [ ] Kullanıcı profil yönetimi API endpoint'leri
