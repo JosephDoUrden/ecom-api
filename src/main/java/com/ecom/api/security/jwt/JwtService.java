@@ -2,12 +2,14 @@ package com.ecom.api.security.jwt;
 
 import com.ecom.api.domain.model.TokenInfo;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -33,9 +35,11 @@ public class JwtService {
   private long refreshExpiration;
 
   private final TokenRepository tokenRepository;
+  private final UserDetailsService userDetailsService;
 
-  public JwtService(TokenRepository tokenRepository) {
+  public JwtService(TokenRepository tokenRepository, UserDetailsService userDetailsService) {
     this.tokenRepository = tokenRepository;
+    this.userDetailsService = userDetailsService;
   }
 
   public String generateToken(UserDetails userDetails) {
@@ -141,6 +145,61 @@ public class JwtService {
     if (userTokens != null && !userTokens.isEmpty()) {
       userTokens.forEach(token -> token.setRevoked(true));
       tokenRepository.saveAll(userTokens);
+    }
+  }
+
+  /**
+   * Validates a refresh token and generates new access and refresh tokens
+   *
+   * @param refreshToken the refresh token to validate
+   * @return a map containing the new access and refresh tokens
+   * @throws IllegalArgumentException if the refresh token is invalid or expired
+   */
+  public Map<String, String> refreshTokens(String refreshToken) {
+    try {
+      // Extract username from token
+      final String username = extractUsername(refreshToken);
+
+      if (username == null) {
+        throw new IllegalArgumentException("Invalid refresh token");
+      }
+
+      // Find token in repository
+      TokenInfo tokenInfo = tokenRepository.findByTokenValue(refreshToken);
+
+      if (tokenInfo == null || tokenInfo.isRevoked()) {
+        throw new IllegalArgumentException("Refresh token has been revoked");
+      }
+
+      // Check if token is for refresh purposes (based on expiration time)
+      Date expiration = extractExpiration(refreshToken);
+      if (expiration.getTime() - new Date().getTime() < jwtExpiration) {
+        throw new IllegalArgumentException("Token is not a valid refresh token");
+      }
+
+      // Load user details
+      UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+      if (userDetails == null) {
+        throw new IllegalArgumentException("User not found");
+      }
+
+      // Revoke the old refresh token
+      revokeToken(refreshToken);
+
+      // Generate new tokens
+      String newAccessToken = generateToken(userDetails);
+      String newRefreshToken = generateRefreshToken(userDetails);
+
+      Map<String, String> tokens = new HashMap<>();
+      tokens.put("accessToken", newAccessToken);
+      tokens.put("refreshToken", newRefreshToken);
+
+      return tokens;
+    } catch (ExpiredJwtException e) {
+      throw new IllegalArgumentException("Refresh token has expired");
+    } catch (Exception e) {
+      throw new IllegalArgumentException("Invalid refresh token: " + e.getMessage());
     }
   }
 }
