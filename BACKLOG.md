@@ -19,11 +19,11 @@ Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını v
 - [x] Redis'te token saklama ve yönetimi
 
 ### Kullanıcı Yönetimi
-- [ ] Kullanıcı kayıt API endpoint'i
-- [ ] Kullanıcı giriş/çıkış API endpoint'leri
-- [ ] Şifre sıfırlama ve değiştirme
-- [ ] Kullanıcı profil yönetimi API endpoint'leri
-- [ ] Rol bazlı erişim kontrolü (RBAC) implementasyonu
+- [x] Kullanıcı kayıt API endpoint'i
+- [x] Kullanıcı giriş/çıkış API endpoint'leri
+- [x] Şifre sıfırlama ve değiştirme
+- [x] Kullanıcı profil yönetimi API endpoint'leri
+- [x] Rol bazlı erişim kontrolü (RBAC) implementasyonu
 
 ### İki Faktörlü Kimlik Doğrulama
 - [ ] 2FA için OTP üretimi ve doğrulama

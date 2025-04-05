@@ -4,17 +4,30 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +44,8 @@ public class SecurityConfig {
             .requestMatchers("/api/admin/**").hasRole("admin")
             .requestMatchers("/api/vendor/**").hasRole("vendor")
             .requestMatchers("/api/customer/**").hasRole("customer")
-            .requestMatchers("/api/auth/refresh").permitAll()
+            .requestMatchers("/api/auth/register", "/api/auth/login", "/api/auth/refresh").permitAll()
+            .requestMatchers("/api/password/reset-request", "/api/password/reset-confirm").permitAll()
             .anyRequest().authenticated())
         .oauth2ResourceServer(oauth2 -> oauth2
             .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter())))
@@ -45,24 +59,56 @@ public class SecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-  /**
-   * Creates a JWT authentication converter for Keycloak integration.
-   * This method is used by the securityFilterChain to convert JWT claims to
-   * Spring Security authorities.
-   *
-   * @return a converter for JWT authentication
-   */
+  @Bean
+  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+    return config.getAuthenticationManager();
+  }
+
+  @Bean
+  public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService,
+      PasswordEncoder passwordEncoder) {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setUserDetailsService(userDetailsService);
+    provider.setPasswordEncoder(passwordEncoder);
+    return provider;
+  }
+
   @Bean
   public Converter<Jwt, AbstractAuthenticationToken> jwtAuthenticationConverter() {
-    JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-    JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+    JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
+    jwtConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter());
+    return jwtConverter;
+  }
 
-    // This is to map Keycloak roles to Spring Security roles
-    // Keycloak uses 'realm_access.roles' for realm roles
-    authoritiesConverter.setAuthoritiesClaimName("realm_access.roles");
-    authoritiesConverter.setAuthorityPrefix("ROLE_");
+  @Bean
+  public Converter<Jwt, Collection<GrantedAuthority>> jwtGrantedAuthoritiesConverter() {
+    JwtGrantedAuthoritiesConverter delegate = new JwtGrantedAuthoritiesConverter();
 
-    converter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
-    return converter;
+    return jwt -> {
+      Collection<GrantedAuthority> authorities = delegate.convert(jwt);
+
+      if (authorities == null) {
+        authorities = List.of();
+      }
+
+      // Extract realm roles from the JWT claims
+      Map<String, Object> realmAccess = jwt.getClaimAsMap("realm_access");
+      if (realmAccess != null) {
+        @SuppressWarnings("unchecked")
+        List<String> roles = (List<String>) realmAccess.get("roles");
+        if (roles != null) {
+          // Add ROLE_ prefix to realm roles for Spring Security compatibility
+          Collection<GrantedAuthority> realmRoles = roles.stream()
+              .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+              .collect(Collectors.toList());
+
+          // Merge realm roles with existing authorities
+          return Stream.concat(authorities.stream(), realmRoles.stream())
+              .collect(Collectors.toList());
+        }
+      }
+
+      return authorities;
+    };
   }
 }
