@@ -1,85 +1,167 @@
-# Kurumsal E-Ticaret Sistemi ve CMS Projesi
+# 🛒 E-Commerce API
 
-## 1. Proje Tanımı
-Bu proje, işletmelerin ürün ve hizmetlerini çevrimiçi olarak satmalarına olanak tanıyacak kurumsal bir e-ticaret platformu geliştirmeyi amaçlamaktadır. Platformda bir içerik yönetim sistemi (CMS) entegre edilerek, kullanıcıların ürün yönetimi, sipariş takibi, müşteri ilişkileri yönetimi ve pazarlama faaliyetlerini kolayca gerçekleştirmeleri sağlanacaktır.
+This project is a fully modular and scalable e-commerce API developed with **Java Spring Boot**. It includes **JWT-based authentication**, **role management (Admin, Vendor, Customer)**, **product and order systems**, and **Swagger/OpenAPI documentation**. 
 
-## 2. Proje Kapsamı
-- **E-Ticaret Platformu:**
-  - Ürün ve kategori yönetimi
-  - Stok takibi
-  - Ödeme entegrasyonu (kredi kartı, havale, kapıda ödeme, dijital cüzdanlar)
-  - Kargo ve lojistik yönetimi
-  - Sipariş yönetimi ve takip sistemi
-  - Kampanya ve indirim yönetimi
-  - Çoklu dil ve para birimi desteği
-  
-- **CMS (İçerik Yönetim Sistemi):**
-  - Ürün açıklamaları, blog içerikleri, haber ve duyuru yönetimi
-  - SEO yönetimi
-  - Medya ve dosya yönetimi
-  - Kullanıcı ve yetkilendirme yönetimi
-  - Raporlama ve analitik panel
-  
-- **Müşteri ve Kullanıcı Yönetimi:**
-  - Kullanıcı kayıt ve giriş sistemi
-  - Roller ve yetkilendirme (admin, satıcı, müşteri vb.)
-  - Kullanıcı sadakat programı
-  - Geri bildirim ve değerlendirme sistemi
+## 🚀 Tech Stack
 
-- **Mobil Uyum ve Uygulama Desteği:**
-  - Responsive tasarım
-  - Mobil uygulama entegrasyonu (iOS, Android)
-  
-- **Güvenlik ve Uyumluluk:**
-  - SSL sertifikası ve güvenli ödeme altyapısı
-  - GDPR ve KVKK uyumluluğu
-  - DDoS ve saldırı koruma önlemleri
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA (Hibernate)
+- Spring Security + JWT
+- PostgreSQL / MySQL
+- Swagger / OpenAPI (springdoc)
+- Lombok
+- MapStruct / ModelMapper
+- Docker
+- (Optional) Redis, Kafka, AWS S3
 
-## 3. Proje Planı
+## 🗂 Project Structure
 
-### **1. Ön Araştırma ve Analiz (2 Hafta)**
-- Pazar ve rakip analizi
-- Hedef kitle belirleme
-- Kullanıcı gereksinimlerinin tanımlanması
-- Teknik gereksinimlerin belirlenmesi
+```
+src/
+├── config/
+├── controller/
+├── dto/
+├── exception/
+├── mapper/
+├── model/ (entities)
+├── repository/
+└── service/
+```
 
-### **2. Mimari ve Teknoloji Seçimi (3 Hafta)**
-- Backend teknolojisi (Node.js, Django, Spring Boot vb.)
-- Frontend teknolojisi (React, Angular, Vue.js vb.)
-- Veritabanı seçimi (PostgreSQL, MySQL, MongoDB vb.)
-- CMS entegrasyon stratejisi
+---
 
-### **3. Tasarım ve Prototipleme (4 Hafta)**
-- UI/UX tasarımı
-- Wireframe ve prototip oluşturma
-- Kullanıcı testleri ve geri bildirim toplama
+## 📅 Development Plan
 
-### **4. Backend ve API Geliştirme (8 Hafta)**
-- Kullanıcı yönetimi ve yetkilendirme
-- Ürün ve sipariş yönetimi API'ları
-- Ödeme ve kargo entegrasyonları
-- CMS içeriği yönetimi API'ları
+### 1. Planning & Requirements (Day 1-2)
+- Define project scope and core modules.
+- Determine user roles: `ADMIN`, `VENDOR`, `CUSTOMER`.
 
-### **5. Frontend Geliştirme (6 Hafta)**
-- Admin paneli geliştirme
-- Kullanıcı arayüzü ve müşteri portalı
-- Responsive tasarım uyarlamaları
+---
 
-### **6. Test ve Optimizasyon (4 Hafta)**
-- Birim testleri
-- Entegrasyon testleri
-- Performans ve güvenlik testleri
+### 2. Project Setup (Day 3)
+- Initialize project with Spring Initializr.
+- Add dependencies (Web, JPA, Security, OpenAPI, Lombok).
+- Setup layered architecture.
 
-### **7. Yayına Alma ve Eğitim (3 Hafta)**
-- Sunucu yapılandırma ve dağıtım
-- Kullanıcı ve yönetici eğitimleri
-- Lansman ve pazarlama
+---
 
-### **8. Destek ve Geliştirme (Sürekli)**
-- Kullanıcı geri bildirimlerinin değerlendirilmesi
-- Yeni özellik geliştirmeleri
-- Güvenlik güncellemeleri ve bakım
+### 3. User Authentication & Roles (Day 4–6)
+- Implement JWT-based user registration & login.
+- Implement role-based access control.
+- Secure endpoints in Swagger.
 
-## 4. Sonuç
-Bu proje, kurumsal düzeyde bir e-ticaret platformu sunarak işletmelerin dijital dönüşüm süreçlerini hızlandıracak ve yönetim süreçlerini kolaylaştıracaktır. CMS entegrasyonu ile içerik yönetimi sağlanarak kullanıcı deneyimi geliştirilecektir. Planlanan takvim doğrultusunda geliştirme süreci yürütülecek ve uzun vadeli destek sağlanacaktır.
+---
+
+### 4. Product & Category Module (Day 7–9)
+- Implement CRUD operations for categories and products.
+- Implement stock tracking.
+
+---
+
+### 5. Cart & Order Module (Day 10–12)
+- Manage user shopping cart.
+- Create and track orders.
+
+---
+
+### 6. Payment Simulation (Day 13–14)
+- Simulate payment process.
+- Generate simple invoice (optional PDF).
+
+---
+
+### 7. Admin Panel Endpoints (Day 15–16)
+- Manage users, products, and orders.
+- Manage campaigns/discounts and shipping.
+
+---
+
+### 8. Swagger Integration (Day 17)
+- Integrate Swagger (springdoc-openapi).
+- Group endpoints and add security scheme.
+
+---
+
+### 9. Testing & Documentation (Day 18–19)
+- Finalize Swagger docs.
+- Write unit/integration tests.
+
+---
+
+### 10. Dockerization & Deployment (Day 20–21)
+- Add `Dockerfile` & `docker-compose.yml`.
+- Deploy to a container platform.
+
+---
+
+## ✨ Optional Features
+
+- Full-text search with Elasticsearch
+- Redis caching for products/categories
+- Kafka integration for events
+- Multi-vendor architecture
+- Mobile-ready REST API (Flutter or React Native frontend)
+
+---
+
+## 🧪 Sample Module: Product
+
+```java
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Integer stock;
+
+    @ManyToOne
+    private Category category;
+}
+
+```
+
+----------
+
+## 📖 Swagger Example
+
+```java
+@Tag(name = "Product", description = "Product management endpoints")
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+
+    @Operation(summary = "Get all products", security = @SecurityRequirement(name = "bearerAuth"))
+    @GetMapping
+    public List<ProductDto> getAllProducts() {
+        return productService.getAll();
+    }
+}
+
+```
+
+----------
+
+## 🧠 Tips
+
+-   Use DTOs to avoid exposing entities directly.
+    
+-   Keep exception handling centralized.
+    
+-   Comment your Swagger annotations for clarity.
+    
+-   Use `@PreAuthorize("hasRole('ADMIN')")` for protected endpoints.
+    
+-   Track development in a project board (Notion, Trello, Jira, etc.)
+    
+
+----------
+
+## 📌 License
+
+This project is for educational and personal development purposes. Commercial use requires permission.
 

@@ -1,214 +1,172 @@
-# Kurumsal E-Ticaret Sistemi Backlog
+# 🗂 E-Commerce API Backlog & Sprint Planning
 
-## Genel Bakış
-Bu dosya, E-Ticaret Sistemi'nin geliştirme sürecindeki sprint planlamasını ve task'ları içermektedir. PRD'de belirtilen tüm gereksinimler, sprintlere ayrılmış ve her bir görev için checkbox eklenmiştir.
+This document outlines the backlog and sprint planning for the E-Commerce API project. Each sprint is planned for a duration of **2 weeks**. Each task includes effort estimation in story points (SP) on a scale of 1-8.
 
-## Sprint 1: Kullanıcı Yönetimi ve Authentication (4 Hafta)
+---
 
-### Mimari ve Altyapı
-- [x] Proje başlangıç yapısının oluşturulması (Spring Boot 3.x)
-- [x] PostgreSQL ve Redis veritabanı entegrasyonu
-- [x] Docker Compose ile geliştirme ortamı kurulumu
-- [x] CI/CD pipeline kurulumu (GitHub Actions)
+## 🏁 Sprint 1: Project Setup & User Management
 
-### Kimlik Doğrulama ve Yetkilendirme
-- [x] Keycloak entegrasyonu ve kurulumu
-- [x] OAuth2 Authorization Server konfigürasyonu
-- [x] JWT token üretimi ve doğrulama mekanizması
-- [x] Refresh token mekanizması implementasyonu
-- [x] Redis'te token saklama ve yönetimi
+### Goals:
+- Set up the project structure and dependencies.
+- Implement user authentication and role-based access control.
+- Configure Docker for development environment.
 
-### Kullanıcı Yönetimi
-- [x] Kullanıcı kayıt API endpoint'i
-- [x] Kullanıcı giriş/çıkış API endpoint'leri
-- [x] Şifre sıfırlama ve değiştirme
-- [x] Kullanıcı profil yönetimi API endpoint'leri
-- [x] Rol bazlı erişim kontrolü (RBAC) implementasyonu
+### Tasks:
+- [ ] **Project Setup** (5 SP)
+  - [x] Initialize the project using Spring Initializr with Java 17 and Spring Boot 3.x.
+  - [ ] Add dependencies: Web, JPA, Security, OpenAPI, Lombok, MapStruct.
+  - [ ] Setup layered architecture (controller, service, repository, model, dto, mapper).
+  - [ ] Configure application properties for local development.
+  - [ ] Setup global exception handling.
 
-### İki Faktörlü Kimlik Doğrulama
-- [ ] 2FA için OTP üretimi ve doğrulama
-- [ ] Email/SMS ile OTP gönderimi entegrasyonu
-- [ ] 2FA aktifleştirme ve deaktifleştirme
+- [ ] **User Authentication** (8 SP)
+  - [ ] Create User entity with roles and required fields.
+  - [ ] Implement user repository with custom queries.
+  - [ ] Create DTOs for user registration and login.
+  - [ ] Implement user service layer with business logic.
+  - [ ] Implement JWT token generation and validation.
+  - [ ] Hash passwords using BCrypt with appropriate strength.
+  - [ ] Add role-based access control (`ADMIN`, `VENDOR`, `CUSTOMER`).
+  - [ ] Create authentication controller with endpoints.
 
-### Audit Logging
-- [ ] Kullanıcı etkinliklerini loglama sistemi
-- [ ] Audit log API endpoint'leri
+- [ ] **Swagger Integration** (3 SP)
+  - [ ] Configure OpenAPI documentation with proper metadata.
+  - [ ] Add Swagger (springdoc-openapi) for API documentation.
+  - [ ] Secure Swagger UI with Bearer Token authentication.
+  - [ ] Add detailed documentation to API endpoints.
 
-## Sprint 2: Ürün ve Sipariş Yönetimi (5 Hafta)
+- [ ] **Docker Setup** (3 SP)
+  - [ ] Create Dockerfile for the application.
+  - [ ] Set up docker-compose.yml with PostgreSQL and application services.
+  - [ ] Configure environment variables for containerized deployment.
+  - [ ] Create Docker volume for persistent database storage.
+  - [ ] Document Docker commands for local development.
 
-### Ürün Yönetimi
-- [ ] Ürün modeli ve repository katmanı
-- [ ] Ürün ekleme API endpoint'i
-- [ ] Ürün güncelleme API endpoint'i
-- [ ] Ürün silme API endpoint'i
-- [ ] Ürün listeleme ve filtreleme API endpoint'leri
+---
 
-### Kategori Yönetimi
-- [ ] Kategori modeli ve repository katmanı
-- [ ] Kategori CRUD API endpoint'leri
-- [ ] Hiyerarşik kategori yapısı
-- [ ] Kategori bazlı ürün filtreleme
+## 🏁 Sprint 2: Product & Category Management
 
-### Stok Yönetimi
-- [ ] Stok modeli ve repository katmanı
-- [ ] Stok güncelleme API endpoint'i
-- [ ] Stok seviyesi takibi ve uyarı sistemi
+### Goals:
+- Build the product and category modules.
+- Implement CRUD operations and stock tracking.
 
-### Sepet Yönetimi
-- [ ] Sepet modeli ve repository katmanı
-- [ ] Sepete ürün ekleme API endpoint'i
-- [ ] Sepetten ürün çıkarma API endpoint'i
-- [ ] Sepet görüntüleme API endpoint'i
-- [ ] Sepet özetleme ve toplam hesaplama
+### Tasks:
+- [ ] **Category Module** (5 SP)
+  - [ ] Create category entity with name, description, and parent relationship.
+  - [ ] Implement category repository with custom queries.
+  - [ ] Create DTOs for category requests and responses.
+  - [ ] Implement category service with business logic.
+  - [ ] Create category controller with REST endpoints.
+  - [ ] Implement category hierarchy (parent-child relationship).
 
-### Sipariş Yönetimi
-- [ ] Sipariş modeli ve repository katmanı
-- [ ] Sipariş oluşturma API endpoint'i
-- [ ] Sipariş güncelleme API endpoint'i
-- [ ] Sipariş listeleme API endpoint'i
-- [ ] Sipariş detayı görüntüleme API endpoint'i
+- [ ] **Product Module** (8 SP)
+  - [ ] Create product entity with required fields (name, description, price, etc.).
+  - [ ] Implement product-category relationship (many-to-one).
+  - [ ] Create product variation entity (size, color, etc.).
+  - [ ] Implement product repository with filtering queries.
+  - [ ] Create DTOs for product requests and responses.
+  - [ ] Implement product service with business logic.
+  - [ ] Create product controller with REST endpoints.
+  - [ ] Implement stock tracking and inventory management.
 
-### Elasticsearch Entegrasyonu
-- [ ] Elasticsearch kurulumu ve konfigürasyonu
-- [ ] Ürün arama ve filtreleme için indeksleme
-- [ ] Tam metin arama API endpoint'i
-- [ ] Facet ve aggregation desteği ile gelişmiş filtreleme
+- [ ] **Validation & Error Handling** (3 SP)
+  - [ ] Add input validation for product and category endpoints.
+  - [ ] Implement custom validation constraints if needed.
+  - [ ] Centralize exception handling for consistent responses.
+  - [ ] Add logging for errors and important operations.
 
-## Sprint 3: Ödeme Entegrasyonu ve CMS API (4 Hafta)
+---
 
-### Ödeme Altyapısı
-- [ ] Ödeme modeli ve repository katmanı
-- [ ] Ödeme işlemleri için ortak interface tasarımı
-- [ ] Ödeme durumu takibi ve callback yönetimi
+## 🏁 Sprint 3: Cart & Order Management
 
-### Ödeme Entegrasyonları
-- [ ] Stripe entegrasyonu
-- [ ] iyzico entegrasyonu
-- [ ] PayPal entegrasyonu
-- [ ] 3D Secure desteği implementasyonu
+### Goals:
+- Build the cart and order modules.
+- Enable users to manage their carts and place orders.
 
-### Abonelik Modelleri
-- [ ] Abonelik modeli ve repository katmanı
-- [ ] Abonelik planları yönetimi
-- [ ] Yinelenen ödemeler ve otomatik yenileme
-- [ ] Abonelik iptal ve değiştirme işlemleri
+### Tasks:
+- [ ] **Cart Module**
+  - [ ] Create cart entity and repository.
+  - [ ] Implement add, update, and remove operations for cart items.
+  - [ ] Calculate total price dynamically.
 
-### Fatura ve E-Arşiv
-- [ ] Fatura modeli ve repository katmanı
-- [ ] Fatura oluşturma ve PDF üretimi
-- [ ] E-arşiv entegrasyonu (GIB veya üçüncü parti)
-- [ ] Fatura listeleme ve görüntüleme API endpoint'leri
+- [ ] **Order Module**
+  - [ ] Create order entity and repository.
+  - [ ] Implement order creation from the cart.
+  - [ ] Add order tracking and status updates (e.g., pending, shipped, delivered).
 
-### CMS İçerik Yönetimi
-- [ ] İçerik modeli ve repository katmanı (Blog, Duyuru, Kampanya)
-- [ ] İçerik CRUD API endpoint'leri
-- [ ] SEO meta bilgileri yönetimi
-- [ ] İçerik kategorileri ve etiket yönetimi
-- [ ] Medya yükleme ve yönetimi API endpoint'leri
+- [ ] **Security**
+  - [ ] Ensure cart and order endpoints are secured by user roles.
 
-## Sprint 4: Bildirimler, Loglama ve Monitoring (3 Hafta)
+---
 
-### Event-Driven Mimari
-- [ ] Kafka kurulumu ve konfigürasyonu
-- [ ] Event producer servis implementasyonu
-- [ ] Event consumer servis implementasyonu
-- [ ] Domain event modellerinin tanımlanması
+## 🏁 Sprint 4: Payment Simulation & Admin Panel
 
-### Bildirim Yönetimi
-- [ ] Bildirim modeli ve repository katmanı
-- [ ] Email bildirim servisi (SMTP entegrasyonu)
-- [ ] SMS bildirim servisi
-- [ ] Push bildirim servisi
+### Goals:
+- Simulate the payment process.
+- Build admin panel endpoints for managing users, products, and orders.
 
-### WebSocket İmplementasyonu
-- [ ] WebSocket konfigürasyonu
-- [ ] Canlı bildirimler için subscription yönetimi
-- [ ] Gerçek zamanlı güncelleme paylaşımı
+### Tasks:
+- [ ] **Payment Simulation**
+  - [ ] Simulate payment processing (no real gateway).
+  - [ ] Mark orders as "paid."
+  - [ ] Generate simple invoices (optional PDF).
 
-### Loglama ve İzleme
-- [ ] Distributed tracing implementasyonu (Sleuth/Zipkin)
-- [ ] Uygulama logları için ELK Stack entegrasyonu
-- [ ] Prometheus metrik toplama
-- [ ] Grafana dashboard'ları hazırlama
+- [ ] **Admin Panel**
+  - [ ] Implement endpoints for managing users, products, and orders.
+  - [ ] Add functionality for creating campaigns/discounts.
+  - [ ] Manage shipping options (e.g., companies, tracking codes).
 
-## Sprint 5: Performans Testleri ve Güvenlik Kontrolleri (3 Hafta)
+---
 
-### Performans Testleri
-- [ ] Yük testi senaryoları hazırlama (JMeter)
-- [ ] 10,000 eşzamanlı kullanıcı testi
-- [ ] Ölçeklendirme ve darboğaz analizi
-- [ ] Veritabanı optimizasyonu
-- [ ] Cache stratejisi implementasyonu
+## 🏁 Sprint 5: Testing, Documentation & Deployment
 
-### Güvenlik Önlemleri
-- [ ] OWASP Top 10 güvenlik açığı taraması
-- [ ] SQL Injection önlemleri
-- [ ] XSS önlemleri
-- [ ] CSRF koruması
-- [ ] Rate limiting ve API throttling implementasyonu
+### Goals:
+- Finalize testing and documentation.
+- Dockerize the application and prepare for deployment.
 
-### API Gateway Konfigürasyonu
-- [ ] Spring Cloud Gateway kurulumu
-- [ ] API rotalama ve yönlendirme yapılandırması
-- [ ] mTLS konfigürasyonu
-- [ ] Trafik analizi ve izleme
+### Tasks:
+- [ ] **Testing**
+  - [ ] Write unit tests using JUnit and Mockito.
+  - [ ] Write integration tests for key modules.
 
-### Veri Güvenliği
-- [ ] GDPR / KVKK uyumluluk kontrolleri
-- [ ] Veri anonimleştirme stratejisi
-- [ ] Veri maskeleme uygulaması
-- [ ] Veri saklama ve silme politikası implementasyonu
+- [ ] **Documentation**
+  - [ ] Finalize Swagger documentation.
+  - [ ] Add a sample Postman collection (optional).
 
-### Yedekleme ve Felaket Kurtarma
-- [ ] Otomatik yedekleme sistemi
-- [ ] Felaket kurtarma planı
-- [ ] Veritabanı replikasyonu
-- [ ] High availability yapılandırması
+- [ ] **Dockerization**
+  - [ ] Create `Dockerfile` and `docker-compose.yml`.
+  - [ ] Connect the application to a PostgreSQL/MySQL container.
 
-## Sprint 6: API Dokümantasyonu ve Production Release (2 Hafta)
+- [ ] **Deployment**
+  - [ ] Deploy the application to a container platform (e.g., Heroku, Render, VPS).
 
-### API Dokümantasyonu
-- [ ] OpenAPI 3.0 şema tanımları
-- [ ] Swagger UI entegrasyonu
-- [ ] API kullanım kılavuzu oluşturma
-- [ ] Endpoint örnekleri ve Postman koleksiyonu
+---
 
-### GraphQL Entegrasyonu
-- [ ] GraphQL şema tanımları
-- [ ] Query resolver'ları
-- [ ] Mutation resolver'ları
-- [ ] GraphQL playground yapılandırması
+## 🏁 Future Backlog (Optional Features)
 
-### Deployment ve DevOps
-- [ ] Kubernetes manifest'leri hazırlama
-- [ ] Helm chart'ları oluşturma
-- [ ] Blue/Green deployment stratejisi
-- [ ] Canary release yapılandırması
+### Goals:
+- Enhance the application with advanced features.
 
-### Son Kontroller ve Release
-- [ ] End-to-end test senaryoları
-- [ ] Smoke testleri
-- [ ] Dokümantasyon gözden geçirme
-- [ ] Production ortamı hazırlığı
-- [ ] Go-live planlaması
+### Tasks:
+- [ ] **Performance Optimization**
+  - [ ] Add Redis caching for products and categories.
+  - [ ] Implement full-text search with Elasticsearch.
 
-## Sonraki Aşama İçin Backlog
+- [ ] **Event-Driven Architecture**
+  - [ ] Integrate Kafka for event-driven communication.
 
-### İleri Analitik Özellikleri
-- [ ] İş zekası dashboard'ları
-- [ ] Tahmine dayalı analitik modelleri
-- [ ] A/B test altyapısı
-- [ ] Kullanıcı davranış analizleri
+- [ ] **Multi-Vendor Support**
+  - [ ] Extend the application to support multiple vendors.
 
-### Gelişmiş E-Ticaret Özellikleri
-- [ ] Çok satıcılı (marketplace) altyapısı
-- [ ] B2B e-ticaret özellikleri
-- [ ] Dinamik fiyatlandırma algoritması
-- [ ] Otomatik promosyon motoru
-- [ ] Gelişmiş ürün öneri sistemi
+- [ ] **Mobile-Ready API**
+  - [ ] Optimize the API for mobile app integration (e.g., Flutter, React Native).
 
-### Uluslararasılaştırma
-- [ ] Çoklu dil desteği
-- [ ] Çoklu para birimi desteği
-- [ ] Bölgesel vergi hesaplamaları
-- [ ] Uluslararası kargo entegrasyonları
+- [ ] **AWS S3 Integration**
+  - [ ] Add support for image uploads to AWS S3.
+
+--- 
+
+## 📌 Notes
+
+- Each sprint will include a sprint review and retrospective to evaluate progress and identify improvements.
+- Tasks are prioritized based on core functionality and business value.
