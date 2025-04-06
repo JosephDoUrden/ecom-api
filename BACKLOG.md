@@ -17,7 +17,7 @@ This document outlines the backlog and sprint planning for the E-Commerce API pr
   - [x] Add dependencies: Web, JPA, Security, OpenAPI, Lombok, MapStruct.
   - [x] Setup layered architecture (controller, service, repository, model, dto, mapper).
   - [x] Configure application properties for local development.
-  - [ ] Setup global exception handling.
+  - [x] Setup global exception handling.
 
 - [ ] **User Authentication** (8 SP)
   - [ ] Create User entity with roles and required fields.
