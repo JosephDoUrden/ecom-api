@@ -12,22 +12,22 @@ This document outlines the backlog and sprint planning for the E-Commerce API pr
 - Configure Docker for development environment.
 
 ### Tasks:
-- [ ] **Project Setup** (5 SP)
+- [x] **Project Setup** (5 SP)
   - [x] Initialize the project using Spring Initializr with Java 17 and Spring Boot 3.x.
   - [x] Add dependencies: Web, JPA, Security, OpenAPI, Lombok, MapStruct.
   - [x] Setup layered architecture (controller, service, repository, model, dto, mapper).
   - [x] Configure application properties for local development.
   - [x] Setup global exception handling.
 
-- [ ] **User Authentication** (8 SP)
-  - [ ] Create User entity with roles and required fields.
-  - [ ] Implement user repository with custom queries.
-  - [ ] Create DTOs for user registration and login.
-  - [ ] Implement user service layer with business logic.
-  - [ ] Implement JWT token generation and validation.
-  - [ ] Hash passwords using BCrypt with appropriate strength.
-  - [ ] Add role-based access control (`ADMIN`, `VENDOR`, `CUSTOMER`).
-  - [ ] Create authentication controller with endpoints.
+- [x] **User Authentication** (8 SP)
+  - [x] Create User entity with roles and required fields.
+  - [x] Implement user repository with custom queries.
+  - [x] Create DTOs for user registration and login.
+  - [x] Implement user service layer with business logic.
+  - [x] Implement JWT token generation and validation.
+  - [x] Hash passwords using BCrypt with appropriate strength.
+  - [x] Add role-based access control (`ADMIN`, `VENDOR`, `CUSTOMER`).
+  - [x] Create authentication controller with endpoints.
 
 - [ ] **Swagger Integration** (3 SP)
   - [ ] Configure OpenAPI documentation with proper metadata.
