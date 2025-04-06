@@ -14,8 +14,8 @@ This document outlines the backlog and sprint planning for the E-Commerce API pr
 ### Tasks:
 - [ ] **Project Setup** (5 SP)
   - [x] Initialize the project using Spring Initializr with Java 17 and Spring Boot 3.x.
-  - [ ] Add dependencies: Web, JPA, Security, OpenAPI, Lombok, MapStruct.
-  - [ ] Setup layered architecture (controller, service, repository, model, dto, mapper).
+  - [x] Add dependencies: Web, JPA, Security, OpenAPI, Lombok, MapStruct.
+  - [x] Setup layered architecture (controller, service, repository, model, dto, mapper).
   - [ ] Configure application properties for local development.
   - [ ] Setup global exception handling.
 
