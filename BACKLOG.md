@@ -29,11 +29,11 @@ This document outlines the backlog and sprint planning for the E-Commerce API pr
   - [x] Add role-based access control (`ADMIN`, `VENDOR`, `CUSTOMER`).
   - [x] Create authentication controller with endpoints.
 
-- [ ] **Swagger Integration** (3 SP)
-  - [ ] Configure OpenAPI documentation with proper metadata.
-  - [ ] Add Swagger (springdoc-openapi) for API documentation.
-  - [ ] Secure Swagger UI with Bearer Token authentication.
-  - [ ] Add detailed documentation to API endpoints.
+- [x] **Swagger Integration** (3 SP)
+  - [x] Configure OpenAPI documentation with proper metadata.
+  - [x] Add Swagger (springdoc-openapi) for API documentation.
+  - [x] Secure Swagger UI with Bearer Token authentication.
+  - [x] Add detailed documentation to API endpoints.
 
 - [ ] **Docker Setup** (3 SP)
   - [ ] Create Dockerfile for the application.
