@@ -1,8 +1,9 @@
-package com.ecommerce.ecomapi.repository;
+package com.ecommerce.api.repository;
 
-import com.ecommerce.ecomapi.model.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+
+import com.ecommerce.api.model.BaseEntity;
 
 @NoRepositoryBean
 public interface BaseRepository<E extends BaseEntity> extends JpaRepository<E, Long> {

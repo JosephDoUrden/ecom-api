@@ -1,10 +1,10 @@
-package com.ecommerce.ecomapi.service;
-
-import com.ecommerce.ecomapi.dto.BaseDto;
-import com.ecommerce.ecomapi.model.BaseEntity;
+package com.ecommerce.api.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.ecommerce.api.dto.BaseDto;
+import com.ecommerce.api.model.BaseEntity;
 
 public interface BaseService<E extends BaseEntity, D extends BaseDto> {
 

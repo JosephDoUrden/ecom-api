@@ -1,12 +1,13 @@
-package com.ecommerce.ecomapi.service.impl;
+package com.ecommerce.api.service.impl;
 
-import com.ecommerce.ecomapi.dto.BaseDto;
-import com.ecommerce.ecomapi.mapper.BaseMapper;
-import com.ecommerce.ecomapi.model.BaseEntity;
-import com.ecommerce.ecomapi.repository.BaseRepository;
-import com.ecommerce.ecomapi.service.BaseService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.ecommerce.api.dto.BaseDto;
+import com.ecommerce.api.mapper.BaseMapper;
+import com.ecommerce.api.model.BaseEntity;
+import com.ecommerce.api.repository.BaseRepository;
+import com.ecommerce.api.service.BaseService;
 
 import java.util.List;
 import java.util.Optional;

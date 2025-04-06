@@ -1,4 +1,4 @@
-package com.ecommerce.ecomapi.dto;
+package com.ecommerce.api.dto;
 
 import lombok.Getter;
 import lombok.Setter;

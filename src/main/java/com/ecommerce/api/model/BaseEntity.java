@@ -1,4 +1,4 @@
-package com.ecommerce.ecomapi.model;
+package com.ecommerce.api.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

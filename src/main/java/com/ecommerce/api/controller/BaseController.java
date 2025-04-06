@@ -1,12 +1,13 @@
-package com.ecommerce.ecomapi.controller;
+package com.ecommerce.api.controller;
 
-import com.ecommerce.ecomapi.dto.BaseDto;
-import com.ecommerce.ecomapi.model.BaseEntity;
-import com.ecommerce.ecomapi.service.BaseService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.ecommerce.api.dto.BaseDto;
+import com.ecommerce.api.model.BaseEntity;
+import com.ecommerce.api.service.BaseService;
 
 import java.util.List;
 
