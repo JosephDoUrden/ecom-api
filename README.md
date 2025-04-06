@@ -31,6 +31,46 @@ src/
 
 ---
 
+## 🔌 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user and get JWT token
+
+### Users
+- `GET /api/users` - List all users (Admin only)
+- `GET /api/users/{id}` - Get user by ID
+- `PUT /api/users/{id}` - Update user
+- `DELETE /api/users/{id}` - Delete user (Admin only)
+
+### Products
+- `GET /api/products` - List all products
+- `GET /api/products/{id}` - Get product by ID
+- `POST /api/products` - Create new product (Vendor/Admin)
+- `PUT /api/products/{id}` - Update product (Vendor/Admin)
+- `DELETE /api/products/{id}` - Delete product (Vendor/Admin)
+
+### Categories
+- `GET /api/categories` - List all categories
+- `GET /api/categories/{id}` - Get category by ID
+- `POST /api/categories` - Create new category (Admin)
+- `PUT /api/categories/{id}` - Update category (Admin)
+- `DELETE /api/categories/{id}` - Delete category (Admin)
+
+### Cart
+- `GET /api/cart` - View current user's cart
+- `POST /api/cart/items` - Add item to cart
+- `PUT /api/cart/items/{id}` - Update cart item quantity
+- `DELETE /api/cart/items/{id}` - Remove item from cart
+
+### Orders
+- `GET /api/orders` - List user's orders
+- `GET /api/orders/{id}` - Get order details
+- `POST /api/orders` - Create order from cart
+- `PUT /api/orders/{id}/status` - Update order status (Admin)
+
+---
+
 ## 📅 Development Plan
 
 ### 1. Planning & Requirements (Day 1-2)

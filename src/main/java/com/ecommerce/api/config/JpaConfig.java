@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EnableJpaAuditing
-@EnableJpaRepositories(basePackages = "com.ecommerce.ecomapi.repository")
+@EnableJpaRepositories(basePackages = "com.ecommerce.api.repository")
 public class JpaConfig {
   // Configuration for JPA if needed
 }

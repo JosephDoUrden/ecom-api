@@ -35,12 +35,12 @@ This document outlines the backlog and sprint planning for the E-Commerce API pr
   - [x] Secure Swagger UI with Bearer Token authentication.
   - [x] Add detailed documentation to API endpoints.
 
-- [ ] **Docker Setup** (3 SP)
-  - [ ] Create Dockerfile for the application.
-  - [ ] Set up docker-compose.yml with PostgreSQL and application services.
-  - [ ] Configure environment variables for containerized deployment.
-  - [ ] Create Docker volume for persistent database storage.
-  - [ ] Document Docker commands for local development.
+- [x] **Docker Setup** (3 SP)
+  - [x] Create Dockerfile for the application.
+  - [x] Set up docker-compose.yml with PostgreSQL and application services.
+  - [x] Configure environment variables for containerized deployment.
+  - [x] Create Docker volume for persistent database storage.
+  - [x] Document Docker commands for local development.
 
 ---
 
